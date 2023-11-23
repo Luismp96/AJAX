@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Practica AJAX</title>
+    </head>
+    <body>
+
+        <!--AJAX CON PHP-->
+
+        <!--<input type="text" id="campo">
+        <button>Calcula</button> -->
+
+        <!--<script>
+            const Peticion = new XMLHttpRequest();
+            const ruta = "servidor.php";
+
+            document.querySelector("button").onclick = function(){
+                var datos = document.getElementById("campo").value;
+                nuevaruta = ruta + "?numero="+datos;
+
+                Peticion.open("GET", nuevaruta);
+                Peticion.send("data=" + datos);
+            }
+
+            
+
+            Peticion.onreadystatechange = function(e){
+                //console.log("el estado de la conexión es: " + Peticion.readyState);
+                //console.log("el codigo de la conexión es: " + Peticion.status);
+
+                if (Peticion.readyState == 4){
+
+                    if(Peticion.status == 200){
+                        console.log(Peticion.responseText);
+                    }else{
+                        console.log("Error en la conexión: " + Peticion.status);
+                    }
+                }
+                
+                
+            }
+
+        </script> -->
+
+
+    <!--CARGA DE JSON-->
+    <!--
+    <script>
+        const Peticion1 = new XMLHttpRequest();
+        const ruta1 = "datos.json";
+
+        Peticion1.open("GET", ruta1);
+        Peticion1.send();
+
+        Peticion1.onreadystatechange = function(e){
+
+        if (Peticion1.readyState == 4){
+
+            if(Peticion1.status == 200){
+                var json = JSON.parse(Peticion1.response);
+                console.log(json);
+                console.log(json.nombre);
+            }else{
+                console.log("Error en la conexión: " + Peticion1.status);
+            }
+        }
+        
+        
+    }
+
+    </script>-->
+
+    <script>
+        const Peticion1 = new XMLHttpRequest();
+        const ruta1 = "datos.json";
+
+        Peticion1.open("GET", ruta1);
+        Peticion1.send();
+
+        Peticion1.onreadystatechange = function(e){
+
+        if (Peticion1.readyState == 4){
+
+            if(Peticion1.status == 200){
+                var json = JSON.parse(Peticion1.response);
+                console.log(json);
+                console.log(json.nombre);
+            }else{
+                console.log("Error en la conexión: " + Peticion1.status);
+            }
+        }
+        
+        
+    }
+
+    </script>
+    </body>
+
+
+</html>

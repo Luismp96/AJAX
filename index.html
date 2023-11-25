@@ -73,13 +73,32 @@
 
     </script>-->
 
+    <input type="text" id="idcliente">
+    <table>
+        <tr>
+            <td>Nombre de Cliente: </td>
+            <td id="recibenombre"></td>
+        </tr>
+        <tr>
+            <td>Email Cliente: </td>
+            <td id="recibeemail"></td>
+        </tr>
+        <tr>
+            <td>Telefono de Cliente: </td>
+            <td id="recibetelefono"></td>
+        </tr>
+
+    </table>
     <script>
         const Peticion1 = new XMLHttpRequest();
-        const ruta1 = "datos.json";
+        const ruta1 = "datos.php";
 
-        Peticion1.open("GET", ruta1);
-        Peticion1.send();
-
+        document.getElementById("idcliente").onchange = function(){
+            var nuevaruta = ruta1 + "?cliente=" + document.getElementById("idcliente").value;
+            Peticion1.open("GET", nuevaruta);
+            Peticion1.send();
+        }
+    
         Peticion1.onreadystatechange = function(e){
 
         if (Peticion1.readyState == 4){
@@ -87,7 +106,9 @@
             if(Peticion1.status == 200){
                 var json = JSON.parse(Peticion1.response);
                 console.log(json);
-                console.log(json.nombre);
+                document.getElementById("recibenombre").innerHTML = json.nombre;
+                document.getElementById("recibeemail").innerHTML = json.email;
+                document.getElementById("recibetelefono").innerHTML = json.telefono;
             }else{
                 console.log("Error en la conexión: " + Peticion1.status);
             }

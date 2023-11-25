@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Practica Semana 1 AJAX</title>
+    </head>
+    <body>
+    Filtra por número de Cliente: <input type="text" id="idcliente"><br><br>
+    Busca por numero de Telefono: <input type="text" id="numtelefono"><br><br>
+    <table border="1" id="tabla">
+        <tr>
+            <td>Nombre de Cliente: </td>
+            <td id="recibenombre"></td>
+        </tr>
+        <tr>
+            <td>Email Cliente: </td>
+            <td id="recibeemail"></td>
+        </tr>
+        <tr>
+            <td>Telefono de Cliente: </td>
+            <td id="recibetelefono"></td>
+        </tr>
+
+    </table>
+    <script>
+        const Peticion1 = new XMLHttpRequest();
+        const Peticion2 = new XMLHttpRequest();
+
+        const ruta1 = "datos.php";
+
+        document.getElementById("idcliente").onchange = function(){
+            var nuevaruta = ruta1 + "?cliente=" + document.getElementById("idcliente").value;
+            
+            Peticion1.open("GET", nuevaruta);
+            
+
+            Peticion1.onreadystatechange = function(e){
+
+                if (Peticion1.readyState == 4){
+
+                    if(Peticion1.status == 200){
+                        try{
+                            var json = JSON.parse(Peticion1.response);
+                            console.log(json);
+                            document.getElementById("numtelefono").value = '';
+                            document.getElementById("recibenombre").innerHTML = json.nombre;
+                            document.getElementById("recibeemail").innerHTML = json.email;
+                            document.getElementById("recibetelefono").innerHTML = json.telefono;
+                        }catch(error){
+                            console.log("Cliente no encontrado..");
+                            document.getElementById("recibenombre").innerHTML = '';
+                            document.getElementById("recibeemail").innerHTML = '';
+                            document.getElementById("recibetelefono").innerHTML = '';
+                        }
+                        
+                    }
+
+                }else{
+                    if (Peticion1.status != 200 && Peticion1.status != 0 ){
+                        console.log("Error en la conexión: " + Peticion1.status);
+                    }
+                    
+                }
+            }
+
+            Peticion1.send();
+
+        }
+    
+
+        document.getElementById("numtelefono").onchange = function(){
+            var nuevaruta1 = ruta1 + "?telefono=" + document.getElementById("numtelefono").value;
+            
+            Peticion2.open("GET", nuevaruta1);
+            Peticion2.send();
+
+            console.log();
+
+            Peticion2.onreadystatechange = function(e){
+
+                if (Peticion2.readyState == 4){
+
+                    if(Peticion2.status == 200){
+                        try{
+                            var json = JSON.parse(Peticion2.response);
+                            console.log(json);
+                            document.getElementById("idcliente").value = '';
+                            document.getElementById("recibenombre").innerHTML = json.nombre;
+                            document.getElementById("recibeemail").innerHTML = json.email;
+                            document.getElementById("recibetelefono").innerHTML = json.telefono;
+                        }catch(error){
+                            console.log("Numero de telefono no encontrado..");
+                            document.getElementById("idcliente").value = '';
+                            document.getElementById("recibenombre").innerHTML = '';
+                            document.getElementById("recibeemail").innerHTML = '';
+                            document.getElementById("recibetelefono").innerHTML = '';
+                        }
+
+                    }else{
+                        if (Peticion2.status != 200 && Peticion2.status != 0){
+                        console.log("Error en la conexión: " + Peticion2.status);
+                    }
+                    }
+                }
+            }
+            
+        }
+
+    </script>
+    </body>
+
+
+</html>
+
+

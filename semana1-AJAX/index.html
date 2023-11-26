@@ -34,6 +34,7 @@
             var nuevaruta = ruta1 + "?cliente=" + document.getElementById("idcliente").value;
             
             Peticion1.open("GET", nuevaruta);
+            Peticion1.send();
             
 
             Peticion1.onreadystatechange = function(e){
@@ -65,7 +66,7 @@
                 }
             }
 
-            Peticion1.send();
+           
 
         }
     
@@ -75,8 +76,6 @@
             
             Peticion2.open("GET", nuevaruta1);
             Peticion2.send();
-
-            console.log();
 
             Peticion2.onreadystatechange = function(e){
 

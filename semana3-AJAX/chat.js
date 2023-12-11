@@ -30,10 +30,11 @@ window.onload = function(){
             fetch("servidor.php?mensaje=" + encodeURI(mensaje) + "&usuario=" + encodeURI(usuario));
         }
     }
-    }
+}
 
     function bucle(){
-        let fecha = new Date()
+        let fecha = new Date();
+
         fetch("mensajes.json?fecha=" + fecha.getUTCSeconds())
 
         .then(function(response){
@@ -42,10 +43,12 @@ window.onload = function(){
         .then(function(datos){    
             
             cadena = "";
+
             for(let i=0;i<datos.length;i++){
                 cadena += `
                 <div class="mensaje">
                     <div class="usuario">` + datos[i].usuario+ `</div>
+                    <br>
                     <div class="fecha">`+ datos[i].fecha+`</div>
                     <div class="texto">`+ datos[i].mensaje+`</div>
                 </div>`
